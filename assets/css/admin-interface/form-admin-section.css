@@ -1,0 +1,15 @@
+.form-section {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/*Alignement of form*/
+.form-box-center.form-box-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;       
+}
