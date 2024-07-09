@@ -2,7 +2,8 @@
 @import url(componnents/header-box.css);
 @import url(reservation-section.css);
 @import url(location-section.css);
-@import url(componnents/table.css);
+@import url(admin-interface/booking-list.css);
+@import url(admin-interface/form-admin-section.css);
 
 
 *{

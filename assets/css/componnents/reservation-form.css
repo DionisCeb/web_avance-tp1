@@ -3,6 +3,7 @@
     border-radius: 10px;
     padding: 20px;
     display: flex;
+    max-width: 500px;
     gap: 20px;
     flex-direction: column;
 }
@@ -31,11 +32,19 @@
 }
 
 /*check-in, check-out*/
-
+/* .name-surname input {
+    width: 100%;
+}
+.name-surname {
+    display: flex;
+    gap: 10px;
+} */
+.email-phone, .name-surname,
 .check-in, .check-out {
     display: flex;
     gap: 10px;
 }
+.email-phone input, .name-surname input,
 .check-in input, .check-out input {
     width: 100%;
 }
