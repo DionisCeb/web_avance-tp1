@@ -1,0 +1,29 @@
+CREATE TABLE `client` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `surname` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `phone` VARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE `car` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `type` VARCHAR(50) NOT NULL,
+    `make` VARCHAR(50) NOT NULL,
+    `model` VARCHAR(100) NOT NULL,
+    `color` VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE `booking` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `car_id` INT NOT NULL,
+    `client_id` INT NOT NULL,
+    `check_in_date` DATE NOT NULL,
+    `check_in_time` TIME NOT NULL,
+    `check_out_date` DATE NOT NULL,
+    `check_out_time` TIME NOT NULL,
+    FOREIGN KEY (`car_id`) REFERENCES `car`(`id`),
+    FOREIGN KEY (`client_id`) REFERENCES `client`(`id`)
+);

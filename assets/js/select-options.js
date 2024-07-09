@@ -30,5 +30,3 @@ function updateModelOptions() {
     //reseter la modele selectione quand le type ou la modele change
     modelSelect.selectedIndex = 0;
 }
-
-console.log("suka");
