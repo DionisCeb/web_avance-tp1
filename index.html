@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script type="module" src="assets/js/select-options.js" defer></script>
     <script src="assets/js/scrolling.js" defer></script>
     <link rel="stylesheet" href="assets/css/main.css">
     <title>Deluxe Location</title>
@@ -48,7 +49,7 @@
                         <div class="container__form-deals">
                             <div class="form-box">
                                 <form class="form-reservation" action="">
-                                    <select name="cars" id="cars">
+                                    <select name="type" id="type">
                                         <option value=""> Choisir le type</option>
                                         <option value="compact">Compacte</option>
                                         <option value="sport">Sport</option>
@@ -61,21 +62,22 @@
                                         <option value="audi">Audi</option>
                                         <option value="mercedes">Mercedes</option>
                                         <option value="toyota">Toyota</option>
-                                        <option value="gmc">GMC</option>
+                                        <option value="ford">Ford</option>
                                       </select>
                                       <select name="model" id="model">
                                         <option value="">Choisir le modèle</option>
-                                        <option value="audi">A3</option>
-                                        <option value="audi">A4</option>
-                                        <option value="audi">A3</option>
-                                        <option value="audi">R8</option>
-                                        <option value="mercedes">C-class</option>
-                                        <option value="mercedes">A-class</option>
-                                        <option value="mercedes">S-class</option>
-                                        <option value="toyota">Supra</option>
-                                        <option value="toyota">Tacoma</option>
-                                        <option value="toyota">Tundra</option>
-                                        <option value="ford">F-150</option>
+                                        <option value="audi-a3" data-make="audi" data-type="compact">Audi A3</option>
+                                        <option value="audi-a4" data-make="audi" data-type="sedan">Audi A4</option>
+                                        <option value="audi-r8" data-make="audi" data-type="sport">Audi R8</option>
+                                        <option value="mercedes-c-class" data-make="mercedes" data-type="sedan">Mercedes C-class</option>
+                                        <option value="mercedes-a-class" data-make="mercedes" data-type="compact">Mercedes A-class</option>
+                                        <option value="mercedes-s-class" data-make="mercedes" data-type="luxury">Mercedes S-class</option>
+                                        <option value="mercedes-amg-gt" data-make="mercedes" data-type="sport">Mercedes AMG-GT</option>
+                                        <option value="toyota-supra" data-make="toyota" data-type="sport">Toyota Supra</option>
+                                        <option value="toyota-tacoma" data-make="toyota" data-type="suv">Toyota Tacoma</option>
+                                        <option value="toyota-tundra" data-make="toyota" data-type="suv">Toyota Tundra</option>
+                                        <option value="ford-f150" data-make="ford" data-type="suv">Ford F-150</option>
+                                        <option value="ford-mustang" data-make="ford" data-type="sport">Ford Mustang</option>
                                       </select>
                                       <select name="color" id="color">
                                         <option value="">Choisir la couleur</option>
