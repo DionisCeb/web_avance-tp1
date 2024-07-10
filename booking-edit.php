@@ -1,16 +1,16 @@
 <?php
 require_once 'classes/CRUD.php';
 
-// Instantiate CRUD object
+// Instancier l'objet CRUD
 $crud = new CRUD();
 
-// Check if ID parameter exists in URL
+// Vérifiez si le paramètre ID existe dans l'URL
 if (isset($_GET['id'])) {
-    // Sanitize the ID parameter
+    // Sanitize l'ID
     $booking_id = htmlspecialchars($_GET['id']);
     
     try {
-        // Prepare SQL query to fetch booking details with client and car info
+        // requête SQL pour récupérer les détails de la réservation avec les informations sur le client et la voiture
         $sql = "SELECT 
                     b.id AS booking_id,
                     b.check_in_date,
@@ -34,16 +34,16 @@ if (isset($_GET['id'])) {
                 WHERE 
                     b.id = :booking_id";
         
-        // Prepare and execute SQL statement
+        // Préparer et exécuter une instruction SQL
         $stmt = $crud->prepare($sql);
         $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_INT);
         $stmt->execute();
         
-        // Fetch the booking data
+        // Récupérer les données de réservation
         $booking = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($booking) {
-            // Display the booking details
+            // // Afficher les détails de la réservation
             ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/main.css">
-    <title>Booking Edit</title>
+    <title>Réservation Modifier</title>
 </head>
 <body>
       <section class="form-section">
@@ -141,7 +141,7 @@ if (isset($_GET['id'])) {
             echo 'Booking not found.';
         }
     } catch (PDOException $e) {
-        // Handle database errors
+        // Gérer les erreurs de base de données
         echo "Error: " . $e->getMessage();
     }
 } else {

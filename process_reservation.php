@@ -1,14 +1,18 @@
 <?php
-session_start(); // Start session
+session_start(); // !!!! -->>>> Démarrer la session
 
 require_once 'classes/CRUD.php';
 
-// Check if the form is submitted
+// Vérifier si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    // Instantiate CRUD object
+    // Instancier l'objet CRUD
     $crud = new CRUD();
 
-    // Retrieve form data
+    // Récupérer les données du formulaire
+    $booking_id = isset($_POST['booking_id']) ? $_POST['booking_id'] : null;
+    $client_id = isset($_POST['client_id']) ? $_POST['client_id'] : null;
+    $car_id = isset($_POST['car_id']) ? $_POST['car_id'] : null;
+
     $type = $_POST['type'];
     $make = $_POST['make'];
     $model = $_POST['model'];
@@ -23,40 +27,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $telephone = $_POST['telephone'];
 
     try {
-        $crud->beginTransaction();
+        $crud->beginTransaction(); // -->>> Démarrer une transaction SQL
 
-        $clientData = array(
-            'name' => $nom,
-            'surname' => $prenom,
-            'email' => $email,
-            'phone' => $telephone,
-        );
-        $client_id = $crud->insert('client', $clientData);
+        if ($booking_id) {
+            // Mettre à jour les enregistrements existants
 
-        // Insert into `car` table
-        $carData = array(
-            'type' => $type,
-            'make' => $make,
-            'model' => $model,
-            'color' => $color
-        );
-        $car_id = $crud->insert('car', $carData);
+            // Mettre à jour les informations du client
+            $clientData = array(
+                'name' => $nom,
+                'surname' => $prenom,
+                'email' => $email,
+                'phone' => $telephone,
+            );
+            $crud->update('client', $clientData, 'id', $client_id);
 
-        // Insert into `booking` table
-        $bookingData = array(
-            'car_id' => $car_id,
-            'client_id' => $client_id,
-            'check_in_date' => $checkInDate,
-            'check_in_time' => $checkInTime,
-            'check_out_date' => $checkOutDate,
-            'check_out_time' => $checkOutTime
-        );
-        $booking_id = $crud->insert('booking', $bookingData);
+            // Mettre à jour les informations du véhicule
+            $carData = array(
+                'type' => $type,
+                'make' => $make,
+                'model' => $model,
+                'color' => $color
+            );
+            $crud->update('car', $carData, 'id', $car_id);
 
-        // Commit transaction
+            // Mettre à jour les informations de réservation
+            $bookingData = array(
+                'check_in_date' => $checkInDate,
+                'check_in_time' => $checkInTime,
+                'check_out_date' => $checkOutDate,
+                'check_out_time' => $checkOutTime
+            );
+            $crud->update('booking', $bookingData, 'id', $booking_id);
+        } else {
+            // Insérer de nouveaux enregistrements
+
+            // Insérer dans la table `client`
+            $clientData = array(
+                'name' => $nom,
+                'surname' => $prenom,
+                'email' => $email,
+                'phone' => $telephone,
+            );
+            $client_id = $crud->insert('client', $clientData);
+
+            // Insérer dans la table `car`
+            $carData = array(
+                'type' => $type,
+                'make' => $make,
+                'model' => $model,
+                'color' => $color
+            );
+            $car_id = $crud->insert('car', $carData);
+
+            // Insérer dans la table `booking`
+            $bookingData = array(
+                'car_id' => $car_id,
+                'client_id' => $client_id,
+                'check_in_date' => $checkInDate,
+                'check_in_time' => $checkInTime,
+                'check_out_date' => $checkOutDate,
+                'check_out_time' => $checkOutTime
+            );
+            $booking_id = $crud->insert('booking', $bookingData);
+        }
+
+        // Valider la transaction
         $crud->commit();
 
-        // Store form data in session
+        // Optionnellement, stocker les données du formulaire en session pour la page de confirmation
         $_SESSION['confirmation_data'] = [
             'type' => $type,
             'make' => $make,
@@ -72,12 +110,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             'telephone' => $telephone
         ];
 
-        // Redirect to confirmation page
-        header('Location: confirmation.php');
+        // Rediriger vers la page de confirmation ou la liste des réservations
+        if ($booking_id) {
+            header('Location: confirmation.php');
+        } else {
+            header('Location: booking-list.php');
+        }
         exit();
     } catch (PDOException $e) {
-        $crud->rollBack();
-        echo "Error: " . $e->getMessage();
+        $crud->rollBack(); // -->>>>> Annuler la transaction en cas d'erreur
+        echo "Erreur : " . $e->getMessage(); // ->>>> Afficher l'erreur PDO
     }
 }
 ?>

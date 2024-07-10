@@ -43,11 +43,13 @@
         </div>
     </header>
     <main>
+        
         <section class="reservation-section" id="reserve-sec">
             <div class="structure">
                 <div class="reservation-boxes-container">             
                         <div class="container__form-deals">
                             <div class="form-box">
+                            <!--Le formulaire principal de création de réservation---->
                             <form class="form-reservation" action="process_reservation.php" method="POST">
                                 <select name="type" id="type">
                                     <option value="">Choisir le type</option>

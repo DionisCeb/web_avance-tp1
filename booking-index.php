@@ -1,16 +1,16 @@
 <?php
 require_once 'classes/CRUD.php';
 
-// Instantiate CRUD object
+// Instancier l'objet CRUD
 $crud = new CRUD();
 
-// Check if ID parameter exists in URL
+
 if (isset($_GET['id'])) {
-    // Sanitize the ID parameter
+    
     $booking_id = htmlspecialchars($_GET['id']);
     
     try {
-        // Prepare SQL query to fetch booking details with client and car info
+        // Requête SQL pour récupérer les détails de la réservation avec les informations sur le client et la voiture
         $sql = "SELECT 
                     b.id AS booking_id,
                     b.check_in_date,
@@ -34,16 +34,16 @@ if (isset($_GET['id'])) {
                 WHERE 
                     b.id = :booking_id";
         
-        // Prepare and execute SQL statement
+        // Préparer et exécuter une instruction SQL
         $stmt = $crud->prepare($sql);
         $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_INT);
         $stmt->execute();
         
-        // Fetch the booking data
+        // Récupérer les données de réservation
         $booking = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($booking) {
-            // Display the booking details
+            // Afficher les détails de la réservation
             ?>
 
             <!DOCTYPE html>
@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                         <a href="booking-list.php" class="header-box_btn deals-link return-secondary-btn">Afficher la liste des réservations</a>
                         <a href="booking-edit.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>" class="header-box_btn deals-link return-secondary-btn secondary-edit-btn">Edit</a>
                         
-                        <a href="booking-delete.php" class="header-box_btn deals-link return-secondary-btn secondary-delete-btn">Delete</a>
+                        <a href="booking-delete.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>" class="header-box_btn deals-link return-secondary-btn secondary-delete-btn">Delete</a>
                     </div>
                 </section>
             </body>
@@ -87,10 +87,10 @@ if (isset($_GET['id'])) {
 
             <?php
         } else {
-            echo 'Booking not found.';
+            echo 'Reservation introuvable.';
         }
     } catch (PDOException $e) {
-        // Handle database errors
+        // Gérer les erreurs de base de données
         echo "Error: " . $e->getMessage();
     }
 } else {
