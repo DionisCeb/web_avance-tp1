@@ -1,3 +1,21 @@
+<?php
+require_once 'classes/CRUD.php';
+
+// Instance CRUD
+$crud = new CRUD();
+
+// // Récupère les données combinées des tables de réservations, de clients et de voitures
+$sql = "SELECT b.id AS booking_id, c.id AS client_id, ca.id AS car_id, c.name AS client_name, c.surname AS client_surname, 
+               c.email AS client_email, c.phone AS client_phone, 
+               b.check_in_date, b.check_in_time, b.check_out_date, b.check_out_time, 
+               ca.type AS car_type, ca.make AS car_make, ca.model AS car_model, ca.color AS car_color
+        FROM booking b
+        INNER JOIN client c ON b.client_id = c.id
+        INNER JOIN car ca ON b.car_id = ca.id";
+$stmt = $crud->query($sql);
+$bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +32,7 @@
                 <tr>
                     <th>id</th>
                     <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Prénom</th>
                     <th>Email</th>
                     <th>Téléphone</th>
                     <th>Date d'arrivée</th>
@@ -28,24 +46,25 @@
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
+                <?php foreach ($bookings as $booking): ?>
                 <tr>
-                    <td>1</td>
-                    <td>Dionis</td>
-                    <td>Cebanu</td>                   
-                    <td>dionis@gmail.com</td>
-                    <td>342 323 4323</td>
-                    <td>25.09.24</td>
-                    <td>10:00</td>
-                    <td>28.09.24</td>
-                    <td>15:00</td>
-                    <td>SUV</td>
-                    <td>Toyota</td>
-                    <td>Tundra</td>
-                    <td>Noire</td>
+                <td><a href="booking-index.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>"><?php echo htmlspecialchars($booking['booking_id']); ?></a></td>
+                    <td></a><?php echo htmlspecialchars($booking['client_name']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['client_surname']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['client_email']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['client_phone']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['check_in_date']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['check_in_time']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['check_out_date']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['check_out_time']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['car_type']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['car_make']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['car_model']); ?></td>
+                    <td><?php echo htmlspecialchars($booking['car_color']); ?></td>
                     <td><button class="booking-list-btn edit-btn">Edit</button></td>
                     <td><button class="booking-list-btn delete-btn">Delete</button></td>
                 </tr>
-                
+                <?php endforeach; ?>
             </table>
         </div>
     </main>

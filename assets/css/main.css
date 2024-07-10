@@ -1,6 +1,7 @@
 @import url(componnents/navigations.css);
 @import url(componnents/header-box.css);
 @import url(reservation-section.css);
+@import url(reservation-confirmation.css);
 @import url(location-section.css);
 @import url(admin-interface/booking-list.css);
 @import url(admin-interface/form-admin-section.css);

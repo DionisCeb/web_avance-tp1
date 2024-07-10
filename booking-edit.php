@@ -11,7 +11,7 @@
         <div class="structure">
             <div class="form-box form-box-center">
                 <div class="form-title">
-                    <h1>Modify the booking number <span>1</span> of <span>Dionis Cebanu</span></h1>
+                    <h1>Modify the booking number <span>1</span> of <span>Mike John</span></h1>
                 </div>
                 <form class="form-reservation" action="">
                     <select name="cars" id="cars">
