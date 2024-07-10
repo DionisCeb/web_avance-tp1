@@ -18,3 +18,9 @@
     padding: 30px;
 }
 
+
+/*titre*/
+.admin-container h1 {
+    font-size: 50px;
+    color: #8b5720;
+}
