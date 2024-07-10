@@ -75,17 +75,18 @@ section.reservation-result-section {
 /*edit/delete btns*/
 
 /*edit*/
-a.header-box_btn.deals-link.return-secondary-btn.secondary-edit-btn {
+.header-box_btn.deals-link.return-secondary-btn.secondary-edit-btn {
     background-color: green;
 }
-a.header-box_btn.deals-link.return-secondary-btn.secondary-edit-btn:hover {
+.header-box_btn.deals-link.return-secondary-btn.secondary-edit-btn:hover {
     background-color: rgb(29, 203, 29);
 }
 /*delete*/
-a.header-box_btn.deals-link.return-secondary-btn.secondary-delete-btn {
+.header-box_btn.deals-link.return-secondary-btn.secondary-delete-btn {
     background-color: rgb(142, 23, 23);
+    border: none;
 }
-a.header-box_btn.deals-link.return-secondary-btn.secondary-delete-btn:hover {
+.header-box_btn.deals-link.return-secondary-btn.secondary-delete-btn:hover {
     background-color: red;
 }
 

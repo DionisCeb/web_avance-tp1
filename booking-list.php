@@ -43,8 +43,8 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Marque de voiture</th>
                     <th>Modèle de voiture</th>
                     <th>Couleur de la voiture</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
                 </tr>
                 <?php foreach ($bookings as $booking): ?>
                 <tr>
@@ -61,8 +61,8 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($booking['car_make']); ?></td>
                     <td><?php echo htmlspecialchars($booking['car_model']); ?></td>
                     <td><?php echo htmlspecialchars($booking['car_color']); ?></td>
-                    <td><button class="booking-list-btn edit-btn">Edit</button></td>
-                    <td><button class="booking-list-btn delete-btn">Delete</button></td>
+                    <td><button class="booking-list-btn edit-btn">Modifier</button></td>
+                    <td><button class="booking-list-btn delete-btn">Supprimer</button></td>
                 </tr>
                 <?php endforeach; ?>
             </table>

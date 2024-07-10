@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
                 <title>Booking Details</title>
             </head>
             <body>
-                <section class="reservation-result-section">
+                <section   ion class="reservation-result-section">
                     <div class="confirmation-container">
                         <div class="confirmation-header">
                             <h1>Détails de la réservation <span><?php echo $booking['booking_id'];?></span></h1>
@@ -77,9 +77,11 @@ if (isset($_GET['id'])) {
                             <div class="value-confirmation"><p>Couleur de voiture: <span><?php echo htmlspecialchars($booking['car_color']); ?></span></p></div>
                         </div>
                         <a href="booking-list.php" class="header-box_btn deals-link return-secondary-btn">Afficher la liste des réservations</a>
-                        <a href="booking-list.php" class="header-box_btn deals-link return-secondary-btn secondary-edit-btn">Edit</a>
-                        <a href="booking-list.php" class="header-box_btn deals-link return-secondary-btn secondary-delete-btn">Delete</a>
+                        <a href="booking-edit.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>" class="header-box_btn deals-link return-secondary-btn secondary-edit-btn">Edit</a>
+                        
+                        <a href="booking-delete.php" class="header-box_btn deals-link return-secondary-btn secondary-delete-btn">Delete</a>
                     </div>
+                </section>
             </body>
             </html>
 

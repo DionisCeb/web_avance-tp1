@@ -35,6 +35,45 @@ class CRUD extends PDO {
         $stmt->execute();
         return $this->lastInsertId();
     }
+
+    /* public function update($table, $data, $field = 'id'){
+        $fieldName = null;
+        foreach($data as $key=>$value){
+            $fieldName .= "$key = :$key, ";
+        }
+        $fieldName = rtrim($fieldName, ', ');
+        //echo $fieldName;
+       // echo "<br>UPDATE client SET name = :name, address = :address, phone = :phone, zip_code = :zip_code, email = :email WHERE id = :id<br>" ;
+
+        $sql = "UPDATE $table SET $fieldName WHERE $field = :$field";
+        $stmt= $this->prepare($sql);
+        foreach($data as $key=>$value){
+            $stmt->bindValue(":$key", $value);
+        }
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    } */
+
+    public function update($table, $data, $value, $field = 'id') {
+        $fields = '';
+        foreach ($data as $key => $val) {
+            $fields .= "$key = :$key, ";
+        }
+        $fields = rtrim($fields, ', ');
+
+        $sql = "UPDATE $table SET $fields WHERE $field = :value";
+        $stmt = $this->prepare($sql);
+
+        foreach ($data as $key => $val) {
+            $stmt->bindValue(":$key", $val);
+        }
+        $stmt->bindValue(':value', $value, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
 
 
