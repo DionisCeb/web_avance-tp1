@@ -2,7 +2,7 @@
 class CRUD extends PDO {
     // Constructeur pour initialiser la connexion à la base de données
     public function __construct(){
-        parent::__construct('mysql:host=localhost;dbname=car_rent;port=3306; charset=utf8', 'root','');
+        parent::__construct('mysql:host=localhost;dbname=e2396498;port=3306; charset=utf8', 'e2396498','hwxwbUZdl5nmurjwLyPr');
     }
 
     // Méthode pour sélectionner toutes les lignes d'une table avec un tri optionnel

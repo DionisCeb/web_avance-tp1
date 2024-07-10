@@ -61,9 +61,9 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($booking['car_make']); ?></td>
                     <td><?php echo htmlspecialchars($booking['car_model']); ?></td>
                     <td><?php echo htmlspecialchars($booking['car_color']); ?></td>
-                    <!-- <td><button class="booking-list-btn edit-btn">Modifier</button></td> -->
+                    
                     <td><a href="booking-edit.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>" class="booking-list-btn edit-btn">Modifier</a></td>
-                    <!-- <td><button class="booking-list-btn delete-btn">Supprimer</button></td> -->
+                    
                     <td><a href="booking-delete.php?id=<?php echo htmlspecialchars($booking['booking_id']); ?>" class="booking-list-btn delete-btn">Supprimer</a></td>
                 </tr>
                 <?php endforeach; ?>
